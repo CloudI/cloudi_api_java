@@ -195,7 +195,8 @@ public class API
      * @param  pattern     a pattern to accept any matching service request
      * @param  instance    a service instance
      * @param  methodName  the method to service matching requests
-     */    public void subscribe(final String pattern,
+     */ 
+    public void subscribe(final String pattern,
                           final Object instance,
                           final String methodName)
     {
