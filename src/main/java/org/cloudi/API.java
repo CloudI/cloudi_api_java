@@ -179,7 +179,7 @@ public class API
     }
 
     /**
-     * @return the number of threads per process
+     * @return the number of threads to create per operating system process
      */
     public static int thread_count() throws InvalidInputException
     {
@@ -189,12 +189,13 @@ public class API
         final int thread_count = Integer.parseInt(s);
         return thread_count;
     }
+
     /**
-     * Subscribes a method in a service instance to a pattern. 
+     * Subscribes an object method to a service name pattern. 
      *
-     * @param  pattern     a pattern to accept any matching service request
-     * @param  instance    a service instance
-     * @param  methodName  the method to service matching requests
+     * @param  pattern     the service name pattern
+     * @param  instance    the object instance
+     * @param  methodName  the object method to handle matching requests
      */ 
     public void subscribe(final String pattern,
                           final Object instance,
@@ -254,10 +255,11 @@ public class API
         subscribe.write_any(new OtpErlangTuple(tuple));
         send(subscribe);
     }
+
     /**
-     * Unsubscribes from a pattern. 
+     * Unsubscribes from a service name pattern. 
      *
-     * @param pattern  a pattern to accept any matching service request
+     * @param pattern  the service name pattern
      */
     public void unsubscribe(final String pattern) throws InvalidInputException
     {
@@ -294,10 +296,10 @@ public class API
 
     /**
      * Asynchronous point-to-point communication to a service
-     * subscribed to <code>name</code>.
+     * subscribed that matches the destination service <code>name</code>.
      *
-     * @param name     the service name
-     * @param request  the request payload
+     * @param name     the destination service name
+     * @param request  the request data
      * @return         a transaction ID
      */
     public TransId send_async(String name, byte[] request)
@@ -309,11 +311,12 @@ public class API
 
     /**
      * Asynchronous point-to-point communication to a service
-     * subscribed to <code>name</code>.
+     * subscribed that matches the destination service <code>name</code>.
      *
-     * @param name          the service name
+     * @param name          the destination service name
      * @param request_info  any request metadata
-     * @param request       the request payload
+     * @param request       the request data
+     * @param timeout       the request timeout in milliseconds
      * @param priority      the request priority
      * @return              a transaction ID
      */
@@ -344,10 +347,10 @@ public class API
 
     /**
      * Synchronous point-to-point communication to a service
-     * subscribed to <code>name</code>.
+     * subscribed that matches the destination service <code>name</code>.
      *
-     * @param name          the service name
-     * @param request       the request payload
+     * @param name          the destination service name
+     * @param request       the request data
      * @return              the response
      */
     public Response send_sync(String name, byte[] request)
@@ -359,12 +362,12 @@ public class API
 
     /**
      * Synchronous point-to-point communication to a service
-     * subscribed to <code>name</code>.
+     * subscribed that matches the destination service <code>name</code>.
      *
-     * @param name          the service name
+     * @param name          the destination service name
      * @param request_info  any request metadata
-     * @param request       the request payload
-     * @param timeout       request timeout in milliseconds
+     * @param request       the request data
+     * @param timeout       the request timeout in milliseconds
      * @param priority      the request priority
      * @return              the response
      */
@@ -394,12 +397,12 @@ public class API
     }
 
     /**
-     * Asynchronous point-to-mutlipoint communication to services
-     * subscribed to <code>name</code>.
+     * Asynchronous point-multicast communication to services
+     * subscribed that matches the destination service <code>name</code>.
      *
-     * @param name          the service name
-     * @param request       the request payload
-     * @return              transcation IDs
+     * @param name          the destination service name
+     * @param request       the request data
+     * @return              transaction IDs
      */
     public List<TransId> mcast_async(String name, byte[] request)
                                      throws MessageDecodingException
@@ -409,14 +412,15 @@ public class API
     }
 
     /**
-     * Asynchronous point-to-mutlipoint communication to services
-     * subscribed to <code>name</code>.
+     * Asynchronous point-multicast communication to services
+     * subscribed that matches the destination service <code>name</code>.
      *
-     * @param name          the service name
+     * @param name          the destination service name
      * @param request_info  any request metadata
-     * @param request       the request
+     * @param request       the request data
+     * @param timeout       the request timeout in milliseconds
      * @param priority      the priority of this request
-     * @return              transcation IDs
+     * @return              transaction IDs
      */
     @SuppressWarnings("unchecked")
     public List<TransId> mcast_async(String name,
@@ -447,16 +451,16 @@ public class API
 
     /**
      * Forward a message to another service
-     * subscribed to <code>name</code>.
+     * subscribed that matches the destination service <code>name</code>.
      *
-     * @param command       typically API.SYNC or API.ASYNC
-     * @param name          service name
+     * @param command       constant API.SYNC or API.ASYNC
+     * @param name          the destination service name
      * @param request_info  any request metadata
-     * @param request       the request
-     * @param timeout       timeout in milliseconds
+     * @param request       the request data
+     * @param timeout       the request timeout in milliseconds
      * @param priority      the priority of this request
-     * @param transId       the transcation ID
-     * @param pid           the originating service's process ID
+     * @param transId       the transaction ID
+     * @param pid           the request's source process ID
      */
     public void forward_(Integer command,
                          String name, byte[] request_info, byte[] request,
@@ -478,15 +482,15 @@ public class API
 
     /**
      * Asynchronously forward a message to another service
-     * subscribed to <code>name</code>.
+     * subscribed that matches the destination service <code>name</code>.
      *
-     * @param name          service name
+     * @param name          the destination service name
      * @param request_info  any request metadata
-     * @param request       the request
-     * @param timeout       timeout in milliseconds
+     * @param request       the request data
+     * @param timeout       the request timeout in milliseconds
      * @param priority      the priority of this request
-     * @param transId       the transcation ID
-     * @param pid           the originating service's process ID
+     * @param transId       the transaction ID
+     * @param pid           the request's source process ID
      */
     public void forward_async(String name, byte[] request_info, byte[] request,
                               Integer timeout, Byte priority,
@@ -533,15 +537,15 @@ public class API
 
     /**
      * Synchronously forward a message to another service
-     * subscribed to <code>name</code>.
+     * subscribed that matches the destination service <code>name</code>.
      *
-     * @param name          service name
+     * @param name          the destination service name
      * @param request_info  any request metadata
-     * @param request       the request
-     * @param timeout       timeout in milliseconds
+     * @param request       the request data
+     * @param timeout       the request timeout in milliseconds
      * @param priority      the priority of this request
-     * @param transId       the transcation ID
-     * @param pid           the originating service's process ID
+     * @param transId       the transaction ID
+     * @param pid           the request's source process ID
      */
     public void forward_sync(String name, byte[] request_info, byte[] request,
                              Integer timeout, Byte priority,
@@ -587,17 +591,16 @@ public class API
     }
 
     /**
-     * Returns a response to a service
-     * subscribed to <code>name</code>.
+     * Returns a response from a service request.
      *
-     * @param command        API.SYNC or API.SYNC
-     * @param name           service name
-     * @param pattern        the pattern
+     * @param command        constant API.SYNC or API.SYNC
+     * @param name           the service name
+     * @param pattern        the service name pattern
      * @param response_info  any response metadata
-     * @param response       the response
-     * @param timeout        timeout in milliseconds
-     * @param transId        the transcation ID
-     * @param pid            the originating service's process ID
+     * @param response       the response data
+     * @param timeout        the request timeout in milliseconds
+     * @param transId        the transaction ID
+     * @param pid            the request's source process ID
      */
     public void return_(Integer command,
                         String name, String pattern,
@@ -618,16 +621,15 @@ public class API
     }
 
     /**
-     * Asynchronously returns a response to a service
-     * subscribed to <code>name</code>.
+     * Asynchronously returns a response from a service request.
      *
-     * @param name           service name
-     * @param pattern        the pattern
+     * @param name           the service name
+     * @param pattern        the service name pattern
      * @param response_info  any response metadata
-     * @param response       the response
-     * @param timeout        timeout in milliseconds
-     * @param transId        the transcation ID
-     * @param pid            the originating service's process ID
+     * @param response       the response data
+     * @param timeout        the request timeout in milliseconds
+     * @param transId        the transaction ID
+     * @param pid            the request's source process ID
      */
     public void return_async(String name, String pattern,
                              byte[] response_info, byte[] response,
@@ -675,16 +677,15 @@ public class API
     }
 
     /**
-     * Synchronously returns a response to a service
-     * subscribed to <code>name</code>.
+     * Synchronously returns a response from a service request.
      *
-     * @param name           service name
-     * @param pattern        the pattern
+     * @param name           the service name
+     * @param pattern        the service name pattern
      * @param response_info  any response metadata
-     * @param response       the response
-     * @param timeout        timeout in milliseconds
-     * @param transId        the transcation ID
-     * @param pid            the originating service's process ID
+     * @param response       the response data
+     * @param timeout        the request timeout in milliseconds
+     * @param transId        the transaction ID
+     * @param pid            the request's source process ID
      */
     public void return_sync(String name, String pattern,
                             byte[] response_info, byte[] response,
@@ -732,7 +733,7 @@ public class API
     }
 
     /**
-     * Asynchronously receive a response 
+     * Asynchronously receive a response.
      *
      * @return the response
      */
@@ -743,9 +744,9 @@ public class API
     }
 
     /**
-     * Asynchronously receive a response 
+     * Asynchronously receive a response.
      *
-     * @param timeout  timeout in milliseconds
+     * @param timeout  the receive timeout in milliseconds
      * @return         the response
      */
     public Response recv_async(Integer timeout)
@@ -755,9 +756,9 @@ public class API
     }
 
     /**
-     * Asynchronously receive a response
+     * Asynchronously receive a response.
      *
-     * @param transId  the transcation ID
+     * @param transId  the transaction ID to receive
      * @return         the response
      */
     public Response recv_async(byte[] transId)
@@ -767,7 +768,7 @@ public class API
     }
 
     /**
-     * Asynchronously receive a response
+     * Asynchronously receive a response.
      *
      * @param consume  if <code>true</code>, will consume the service request
      *                 so it is not accessible with the same function call in
@@ -781,10 +782,10 @@ public class API
     }
 
     /**
-     * Asynchronously receive a response
+     * Asynchronously receive a response.
      *
-     * @param timeout  timeout in milliseconds
-     * @param transId  the transcation ID
+     * @param timeout  the receive timeout in milliseconds
+     * @param transId  the transaction ID to receive
      * @return         the response
      */
     public Response recv_async(Integer timeout, byte[] transId)
@@ -794,9 +795,9 @@ public class API
     }
 
     /**
-     * Asynchronously receive a response
+     * Asynchronously receive a response.
      *
-     * @param timeout  timeout in milliseconds
+     * @param timeout  the receive timeout in milliseconds
      * @param consume  if <code>true</code>, will consume the service request
      *                 so it is not accessible with the same function call in
      *                 the future
@@ -809,9 +810,9 @@ public class API
     }
 
     /**
-     * Asynchronously receive a response
+     * Asynchronously receive a response.
      *
-     * @param transId  the transaction ID
+     * @param transId  the transaction ID to receive
      * @param consume  if <code>true</code>, will consume the service request
      *                 so it is not accessible with the same function call in
      *                 the future
@@ -824,10 +825,10 @@ public class API
     }
 
     /**
-     * Asynchronously receive a response
+     * Asynchronously receive a response.
      *
-     * @param timeout  timeout in milliseconds
-     * @param transId  the transaction ID
+     * @param timeout  the receive timeout in milliseconds
+     * @param transId  the transaction ID to receive
      * @param consume  if <code>true</code>, will consume the service request
      *                 so it is not accessible with the same function call in
      *                 the future
