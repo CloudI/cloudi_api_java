@@ -1,9 +1,9 @@
-cloudi_api_java
-===============
+`cloudi_api_java`
+=================
 
-![Travis CI Build Status](https://travis-ci.org/CloudI/cloudi_api_java.svg)
+[![Build Status](https://travis-ci.org/CloudI/cloudi_api_java.png)](https://travis-ci.org/CloudI/cloudi_api_java)
 
-Java CloudI API
+Java [CloudI API](http://cloudi.org/api.html#1_Intro)
 
 BUILD
 -----
