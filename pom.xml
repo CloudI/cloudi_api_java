@@ -2,7 +2,8 @@
   <modelVersion>4.0.0</modelVersion>
   <properties>
     <!-- method reference usage requires 1.8 set here,
-         but 1.6 is the minimum version supported by the source code -->
+         but 1.6 is the minimum version supported by the source code
+      -->
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
   </properties>
