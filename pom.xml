@@ -1,9 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <properties>
-    <!-- method reference usage requires 1.8 set here,
-         but 1.6 is the minimum version supported by the source code
-      -->
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
   </properties>
@@ -35,6 +32,37 @@
     <developerConnection>scm:git:git@github.com:CloudI/cloudi_api_java.git</developerConnection>
     <url>git@github.com:CloudI/cloudi_api_java.git</url>
   </scm>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <classifier>${envClassifier}</classifier>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <profiles>
+    <!-- mvn clean package -P jdk16
+         mvn clean package -P jdk17
+      -->
+    <profile>
+      <id>jdk16</id>
+      <properties>
+        <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <envClassifier>jdk16</envClassifier>
+      </properties>
+    </profile>
+    <profile>
+      <id>jdk17</id>
+      <properties>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <envClassifier>jdk17</envClassifier>
+      </properties>
+    </profile>
+  </profiles>
   <dependencies>
     <dependency>
       <groupId>org.erlang.otp</groupId>
