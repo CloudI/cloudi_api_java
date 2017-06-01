@@ -14,4 +14,13 @@ BUILD
     mvn install -DskipTests=true -B -V
     mvn test -B
 
+Author
+------
+
+Michael Truog (mjtruog [at] gmail (dot) com)
+
+License
+-------
+
+MIT License
 
