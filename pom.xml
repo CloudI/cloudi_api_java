@@ -97,9 +97,15 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <configuration>
           <classifier>${envClassifier}</classifier>
+          <archive>
+            <manifestEntries>
+              <Automatic-Module-Name>org.cloudi</Automatic-Module-Name>
+            </manifestEntries>
+          </archive>
         </configuration>
       </plugin>
     </plugins>
