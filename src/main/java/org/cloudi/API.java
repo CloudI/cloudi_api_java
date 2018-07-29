@@ -239,6 +239,18 @@ public class API
     }
 
     /**
+     * Subscribes a static method to a service name pattern.
+     *
+     * @param  pattern     the service name pattern
+     * @param  callback    method reference for callback (Java 8 or higher)
+     */
+    public void subscribe(final String pattern,
+                          final FunctionInterface10 callback)
+    {
+        this.subscribe(pattern, new FunctionObject10(this, callback));
+    }
+
+    /**
      * Subscribes an object method to a service name pattern.
      *
      * @param  pattern     the service name pattern
