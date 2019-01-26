@@ -5,7 +5,6 @@ jdk:
   - oraclejdk8
   - oraclejdk9
   - openjdk8
-  - openjdk7
 install:
   - mvn install -Dgpg.skip=true -B -V
   - mvn -P jdk17 install -Dgpg.skip=true -B -V
