@@ -3,6 +3,7 @@
   <properties>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
+    <javadoc.opts>-Xdoclint:none</javadoc.opts>
   </properties>
   <parent>
     <groupId>org.sonatype.oss</groupId>
@@ -88,6 +89,7 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
           <source>8</source>
+          <additionalparam>${javadoc.opts}</additionalparam>
         </configuration>
         <version>2.9.1</version>
         <executions>
@@ -110,6 +112,7 @@
             </manifestEntries>
           </archive>
         </configuration>
+        <version>2.4</version>
       </plugin>
     </plugins>
   </build>
