@@ -14,8 +14,7 @@ The JAR includes `jinterface-1.9.1` from
 BUILD
 -----
 
-    mvn install -DskipTests=true -B -V
-    mvn test -B
+    mvn clean package
 
 Author
 ------
