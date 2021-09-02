@@ -1,11 +1,10 @@
-dist: xenial
+dist: bionic
 language: java
 jdk:
-  - openjdk8
-  - openjdk10
   - openjdk11
 install:
   - mvn install -Dgpg.skip=true -B -V
+  - mvn -P jdk18 install -Dgpg.skip=true -B -V
   - mvn -P jdk17 install -Dgpg.skip=true -B -V
   - mvn -P jdk16 install -Dgpg.skip=true -B -V
 notifications:
