@@ -103,7 +103,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <configuration>
-          <classifier>${envClassifier}</classifier>
+          <classifier>${classifier.jdk}</classifier>
           <archive>
             <manifestEntries>
               <Automatic-Module-Name>org.cloudi</Automatic-Module-Name>
@@ -133,7 +133,7 @@
         <maven.compiler.release>6</maven.compiler.release>
         <maven.javadoc.skip>true</maven.javadoc.skip>
         <maven.source.skip>true</maven.source.skip>
-        <envClassifier>jdk16</envClassifier>
+        <classifier.jdk>jdk16</classifier.jdk>
       </properties>
     </profile>
     <profile>
@@ -142,7 +142,7 @@
         <maven.compiler.release>7</maven.compiler.release>
         <maven.javadoc.skip>true</maven.javadoc.skip>
         <maven.source.skip>true</maven.source.skip>
-        <envClassifier>jdk17</envClassifier>
+        <classifier.jdk>jdk17</classifier.jdk>
       </properties>
     </profile>
     <profile>
@@ -151,7 +151,7 @@
         <maven.compiler.release>8</maven.compiler.release>
         <maven.javadoc.skip>true</maven.javadoc.skip>
         <maven.source.skip>true</maven.source.skip>
-        <envClassifier>jdk18</envClassifier>
+        <classifier.jdk>jdk18</classifier.jdk>
       </properties>
     </profile>
   </profiles>
