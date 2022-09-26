@@ -15,6 +15,20 @@
   <version>2.0.4.1</version>
   <name>cloudi_api_java</name>
   <url>https://www.cloudi.org</url>
+  <inceptionYear>2009</inceptionYear>
+  <issueManagement>
+    <system>github</system>
+    <url>https://github.com/CloudI/CloudI/issues</url>
+  </issueManagement>
+  <mailingLists>
+    <mailingList>
+      <name>CloudI Questions</name>
+      <archive>https://lists.osdn.me/mailman/archives/cloudi-questions</archive>
+      <subscribe>cloudi-questions-join@lists.osdn.me</subscribe>
+      <unsubscribe>cloudi-questions-leave@lists.osdn.me</unsubscribe>
+      <post>cloudi-questions@lists.osdn.me</post>
+    </mailingList>
+  </mailingLists>
   <licenses>
     <license>
       <name>MIT</name>
