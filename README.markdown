@@ -8,7 +8,7 @@ Available for maven at [`http://search.maven.org/`](http://search.maven.org/#sea
 
 Java [CloudI API](https://cloudi.org/api.html#1_Intro)
 
-The JAR includes `jinterface-1.12` from
+The JAR includes `jinterface-1.12.2` from
 [`https://github.com/erlang/otp` at the tag `OTP-24.3.4.5`](https://github.com/erlang/otp/tree/OTP-24.3.4.5/lib/jinterface).
 
 BUILD
