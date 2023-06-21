@@ -2,9 +2,9 @@
 =================
 
 [![Build Status](https://app.travis-ci.com/CloudI/cloudi_api_java.svg?branch=master)](https://app.travis-ci.com/CloudI/cloudi_api_java)
-[![Maven Package Version](https://img.shields.io/maven-central/v/org.cloudi/cloudi_api_java.svg?maxAge=2592000)](http://search.maven.org/#search|ga|1|a%3A%22cloudi_api_java%22)
+[![Maven Package Version](https://img.shields.io/maven-central/v/org.cloudi/cloudi_api_java.svg)](https://central.sonatype.com/artifact/org.cloudi/cloudi_api_java/)
 
-Available for maven at [`http://search.maven.org/`](http://search.maven.org/#search|gav|1|g%3A%22org.cloudi%22%20AND%20a%3A%22cloudi_api_java%22).
+Available for maven at [`https://central.sonatype.com`](https://central.sonatype.com/artifact/org.cloudi/cloudi_api_java/).
 
 Java [CloudI API](https://cloudi.org/api.html#1_Intro)
 
